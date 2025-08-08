@@ -1,5 +1,5 @@
 "use client";
-import React from 'react'
+import React, { Suspense } from 'react'
 import Image from 'next/image'
 import logo from "../../assets/common/LogoWhite.svg"
 import localizacao from "../../assets/sections/localizacao.png"
@@ -24,12 +24,12 @@ const menuItems = [
 
 import { useSearchParams } from "next/navigation";
 
-const Sections = () => {
+const SectionsContent = () => {
     const searchParams = useSearchParams();
     const [activeIdx, setActiveIdx] = React.useState<number>(0);
 
     React.useEffect(() => {
-      const idx = searchParams.get("activeIdx");
+      const idx = searchParams?.get("activeIdx");
       if (idx !== null && !isNaN(Number(idx))) {
         setActiveIdx(Number(idx));
       }
@@ -97,6 +97,14 @@ const Sections = () => {
         </aside>
     </div>
   );
+};
+
+const Sections = () => {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <SectionsContent />
+        </Suspense>
+    );
 };
 
 export default Sections

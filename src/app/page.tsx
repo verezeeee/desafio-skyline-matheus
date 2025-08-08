@@ -33,7 +33,7 @@ export default function Home() {
           {menuItems.map((item, idx) => (
             <div
               key={idx}
-              className="flex flex-col gap-2 items-center cursor-pointer"
+              className="flex flex-col gap-2 items-center cursor-pointer transition-transform duration-200 hover:scale-105"
               onClick={() => {
                 router.push(`/sections?activeIdx=${idx}`);
               }}
